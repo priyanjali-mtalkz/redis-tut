@@ -31,6 +31,18 @@ def redis_integer():
         print(inc)
     except Exception as e:
         print(e)
+app.route('/')
+def home():
+    try:
+        for x in coll.find():
+            obj = dumps(coll)
+            r.set('users',obj)
+            l = json.loads(r.get('user'))
+            print(l)
+        return jsonify(l)
+    except Exception as e:
+        print("--ERROR--",e)
+    return jsonify()
 
 if __name__ == "__main__":
     redis_string()
